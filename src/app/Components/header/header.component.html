@@ -1,0 +1,33 @@
+<div>
+
+    <nav class="navbar navbar-dark bg-subbar" style="position: fixed;">
+        <div class="main-div-nav">
+            <div>
+                <span class="nav-item" *ngIf="!IsTodo">
+                    <a class="nav-link" [routerLink] ="'/home'"><b>Home</b></a>
+                </span>
+                <span class="nav-item" *ngIf="IsTodo">
+                    <a class="nav-link"><b>TODO APPLICATION</b></a>
+                </span>
+            </div>
+            <div class="nav-login-btns">
+                <span *ngIf="!IsTodo">
+                    <a class="nav-link " [routerLink]="'/logIn'"><b>Log In</b></a>
+                </span>
+
+                <span class="nav-item" *ngIf="!IsTodo">
+                    <a class="nav-link" [routerLink]="'/signUp'"><b>Registration</b></a>
+                </span>
+
+
+                <span class="nav-item" *ngIf="IsTodo">
+                    <div style="display: flex;">
+                         <span class="imgcontainer"><img src="/assets/sign-up.png" alt="login-logo" class="avatar"></span>
+                <span class="nav-link"><b>{{currentUser}}</b></span>
+                <a class="nav-link" style="cursor: pointer;" (click)="redirectHome()"><b>Logout</b></a>
+            </div>
+            </span>
+        </div>
+</div>
+</nav>
+</div>

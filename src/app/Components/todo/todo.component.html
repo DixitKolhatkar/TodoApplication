@@ -1,0 +1,72 @@
+<!-- Open block to add new Todo Title -->
+<div class="add-todo-container">
+    <div class="container add-todo-outer" [ngClass]="{'addClass':addIndex}">
+        <span *ngIf="displayNewTodofield">
+    
+    <form class="form-outer" [formGroup]="newTodoForm" >
+        <div style="display: flex;">
+      <input type="text" placeholder="Enter Todo Title..." formControlName="todoTitle" class="add-todo-input" >
+      <button (click)="addTodoTitle()" class="btn btn-primary btn-sm add-task-btn" >Add TODO</button>
+    </div>
+    </form>
+
+</span>
+    </div>
+
+    <div class="add-todo-btn" *ngIf="!displayNewTodofield">
+        <button (click)="addTodoTitleField()" class="btn btn-primary" style="width: max-content;">Add Todo</button>
+    </div>
+</div>
+
+<div class="container outer-border">
+    <span *ngFor="let todos of todoList">
+    <div class="card card-outer">
+  <form class="form-outer" [formGroup]="todoForm" (keydown.enter)="$event.preventDefault()" >
+
+ <!-- Display tasks with Todo Title  -->
+ <div class="todo-outer">
+    <span class="todo-title"><b>{{todos.todoTitle}}</b></span>
+    <button class="btn btn-danger btn-sm" (click)="deleteTodo(todos._id)">Remove Todo</button>
+</div>
+<hr>
+<div class="todos">
+    <div *ngFor="let todo of todos.todoItems; let i = index;" class="todo">
+        <div class="id"> {{i+1}} </div>
+        <div class="content" #todoTask> {{todo.todoName}} </div>
+        <button class="btn btn-primary btn-sm btn-edit" (click)="editTask(todo._id,todos._id,todoTask.innerText)">Edit</button>
+        <button class="btn btn-danger btn-sm btn-remove" (click)="deleteTask(todo._id,todos._id)">Remove</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal model-outer" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Task</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" formControlName="updatedTask" style="width: 100%;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="updateTask()">
+                    Update
+                  </button>
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add task under Todo -->
+<div style="display: flex;">
+    <input type="text" placeholder="Enter Task..." formControlName="todoName" class="todo-input">
+    <button (click)="addTask(todos._id)" class="btn btn-primary btn-sm add-task-btn">Add Task</button>
+</div>
+
+</form>
+</div>
+</span>
+</div>

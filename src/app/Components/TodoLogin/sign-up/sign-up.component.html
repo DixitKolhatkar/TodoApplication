@@ -1,0 +1,54 @@
+<div class="container">
+    <h2 class="signup-main" style="margin-bottom: 23px;">User Registration</h2>
+    <div class="signup-main">
+        <form class="form-outer" [formGroup]="signUpForm">
+            <div class="imgcontainer">
+                <img src="/assets/sign-up.png" alt="login-logo" class="avatar">
+            </div>
+
+            <div class="container">
+                <div class="card-left">
+                    <div>
+                        <label><b>User Name</b></label>
+                        <input type="text" placeholder="Enter Username" id="name" formControlName="name">
+                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'name'">{{fieldrequired}} fiels is required.</div>
+                    </div>
+                    <div class="card-right">
+                        <label><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" id="email" formControlName="email">
+                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'email'">{{fieldrequired}} fiels is required.</div>
+                        <div class="err-msg" *ngIf="signUpForm.get('email')?.hasError('pattern')">
+                            Must be valid <strong>email</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-left">
+                    <div>
+                        <label><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" id="password" formControlName="password">
+                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'password'">{{fieldrequired}} fiels is required.</div>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <label><b>Confirm Password</b></label>
+                        <input type="password" placeholder="Enter Confirm Password" id="confirmPassword" formControlName="confirmPassword">
+                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'confirmPassword'">{{fieldrequired}} fiels is required.</div>
+                    </div>
+                </div>
+                <div>
+                    <label><b>Phone Number</b></label>
+                    <input type="text" placeholder="Enter Phone Number" id="phone" formControlName="phone" oninput="this.value=this.value.replace(/[^0-9\.]/g,'');">
+                    <div class="err-msg" *ngIf="isValidation && fieldrequired === 'phone'">{{fieldrequired}} fiels is required.</div>
+                    <div class="err-msg" *ngIf="signUpForm.get('phone')?.hasError('maxlength') ">
+                        Phone Number can be max <strong>14</strong> .
+                    </div>
+                </div>
+
+                <div class="btn-submit">
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Register</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

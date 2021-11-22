@@ -1,0 +1,40 @@
+.nav-login-btns {
+    display: flex;
+    margin-left: auto;
+}
+
+.main-div-nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.bg-subbar {
+    background-color: greenyellow;
+    width: 100%;
+}
+
+.nav-link {
+    padding: .5rem 1rem;
+    color: black;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.imgcontainer {
+    text-align: end;
+}
+
+img.avatar {
+    width: 12%;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-right: -11px;
+}
+
+@media screen and (max-width: 768px) {
+    img.avatar {
+        width: 18px;
+        margin-top: 13px;
+    }
+}
