@@ -14,6 +14,5 @@ export class TodoItems {
     }
     public todoName?: string;
     public taskId?: string;
-    public isCompleted?: boolean;
     public dateCreated?: string;
 }

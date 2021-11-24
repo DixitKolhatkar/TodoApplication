@@ -4,7 +4,7 @@
 
 .todo {
     display: flex;
-    padding: 10px 15px;
+    padding: 5px 10px;
     background-color: aliceblue;
     border-bottom: 1px solid #DDD;
 }
@@ -24,7 +24,7 @@
 .todo-input {
     display: block;
     width: 83%;
-    padding: 10px 15px;
+    padding: 6px 10px;
     appearance: none;
     border: none;
     background-color: paleturquoise;
@@ -51,6 +51,7 @@
 
 .todo-title {
     padding-left: 9px;
+    width: 72%;
 }
 
 .add-todo-btn {
@@ -61,7 +62,7 @@
 .add-todo-input {
     display: block;
     width: 50%;
-    padding: 10px 15px;
+    padding: 6px 10px;
     appearance: none;
     border: none;
     background-color: paleturquoise;
@@ -73,13 +74,21 @@
 
 .todo-outer {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.update-input {
+    width: 100%;
+}
+
+.add-task-outer {
+    display: flex;
 }
 
 .add-task-btn {
     /* width: 19%; */
     height: 20%;
-    margin-top: 24px;
+    margin-top: 20px;
     margin-left: 14px;
 }
 

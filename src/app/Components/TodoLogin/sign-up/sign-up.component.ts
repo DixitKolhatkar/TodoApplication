@@ -24,14 +24,15 @@ export class SignUpComponent implements OnInit {
   }
 
   public buildFormControls() {
+
     this.signUpForm = this.formBuilder.group({
+
       "name": new FormControl('', [
         Validators.required
       ]),
       "email": new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
-
+        Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
       ]),
       "password": new FormControl('', [
         Validators.required
@@ -44,6 +45,7 @@ export class SignUpComponent implements OnInit {
         Validators.maxLength(14)
       ])
     })
+
   }
 
   public setFocusOnInvalidField(): void {
@@ -58,6 +60,8 @@ export class SignUpComponent implements OnInit {
 
       let inputDetail = Object.keys(this.signUpForm.controls)
         .filter(input => input === field);
+      debugger;
+
       if (inputDetail.length > 0) {
         this.isValidation = true;
         this.fieldrequired = field;
@@ -79,15 +83,21 @@ export class SignUpComponent implements OnInit {
     this.todoServiceService.register(this.registration).subscribe((response) => {
 
       if (response == null) {
-        Swal.fire('User registered succcessfully');
+        Swal.fire('Registered!',
+          'User registered succcessfully',
+          'success');
         this.router.navigate(['/logIn']);
       }
       else {
         if (response.message == "Password not matching") {
-          Swal.fire('Entered passoword is not matching with Confirm password');
+          Swal.fire('Failed!',
+            'Entered passoword is not matching with Confirm password',
+            'error');
         }
         if (response.message == "User already exist") {
-          Swal.fire('User already exist with same Username or Email.');
+          Swal.fire('Failed!',
+            'User already exist with same Username or Email.',
+            'error');
         }
       }
     })

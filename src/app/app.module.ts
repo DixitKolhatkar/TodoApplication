@@ -11,13 +11,12 @@ import { AuthInterceptor } from './auth/auth.interceptor';
   declarations: [
     AppComponent,
     HeaderComponent
-
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    
+    HttpClientModule
   ],
   providers: [AuthGuard,
   {

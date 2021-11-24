@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { TodoServiceService } from 'src/app/todo-service.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { DatePipe } from '@angular/common';
-import { $ } from 'protractor';
+// import { $ } from 'protractor';
 
 @Component({
   selector: 'app-todo',
@@ -23,6 +23,9 @@ export class TodoComponent implements OnInit {
   public displayStyle = "none";
   public taskId: string;
   public todoId: string;
+  public todoName: string;
+  public isTodoUpdate: boolean = false;
+
   constructor(public formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private datePipe: DatePipe) {
   }
 
@@ -75,7 +78,9 @@ export class TodoComponent implements OnInit {
       this.todoServiceService.addNewTodo(newTodo[0]).subscribe((response) => {
         this.getTodos();
         this.newTodoForm.get("todoTitle").setValue("");
-        Swal.fire('Todo title added successfully');
+        Swal.fire('Added!',
+          'Todo title added successfully',
+          'success');
       })
     }
   }
@@ -87,7 +92,6 @@ export class TodoComponent implements OnInit {
       myTask.push(
         {
           todoName: this.todoForm.value.todoName,
-          isCompleted: false,
           dateCreated: this.myFormattedDate
         }
       );
@@ -95,9 +99,13 @@ export class TodoComponent implements OnInit {
       this.todoServiceService.addNewTask(todoId, myTask[0]).subscribe((data) => {
         this.getTodos();
         if (data) {
-          Swal.fire('Task added successfully');
+          Swal.fire('Added!',
+            'Task added successfully',
+            'success');
         } else {
-          Swal.fire('Unable to add task');
+          Swal.fire('Failed!',
+            'Unable to add task',
+            'error');
         }
       })
       this.todoForm.get("todoName").setValue("");
@@ -110,10 +118,37 @@ export class TodoComponent implements OnInit {
     this.todoServiceService.editTask(this.taskId, this.todoId, taskName).subscribe((response) => {
       this.getTodos();
       if (response.result.acknowledged) {
-        Swal.fire('Task updated successfully');
+        Swal.fire(
+          'Updated!',
+          'Task updated successfully',
+          'success');
       }
       else {
-        Swal.fire('Unable to Update task');
+        Swal.fire('Failed!',
+          'Unable to Update task',
+          'error');
+      }
+      this.displayStyle = "none";
+    })
+    this.addIndex = false;
+  }
+
+  // Edit/update Todo Title
+  updateTodo() {
+    debugger;
+    let todoTitle = this.todoForm.get("updatedTask").value;
+    this.todoServiceService.editTodoTitle(this.todoId, todoTitle).subscribe((response) => {
+      this.getTodos();
+      if (response.result.acknowledged) {
+        Swal.fire(
+          'Updated!',
+          'Title updated successfully',
+          'success');
+      }
+      else {
+        Swal.fire('Failed!',
+          'Unable to Update Title',
+          'error');
       }
       this.displayStyle = "none";
     })
@@ -126,10 +161,17 @@ export class TodoComponent implements OnInit {
     this.todoServiceService.deleteTodo(todoId).subscribe((response) => {
       this.getTodos();
       if (response) {
-        Swal.fire('Todo deleted successfully');
+        Swal.fire(
+          'Deleted!',
+          'Todo deleted successfully',
+          'success');
       }
       else {
-        Swal.fire('Unable to Delete todo');
+        Swal.fire(
+          'Failed!',
+          'Unable to Delete todo',
+          'error'
+        );
       }
 
     })
@@ -141,10 +183,16 @@ export class TodoComponent implements OnInit {
     this.todoServiceService.deleteTask(taskId, todoId).subscribe((response) => {
       if (response.result) {
         this.getTodos();
-        Swal.fire('Task removed successfully');
+        Swal.fire(
+          'Deleted!',
+          'Task removed successfully',
+          'success');
       }
       else {
-        Swal.fire('Unable to remove task');
+        Swal.fire(
+          'Failed!',
+          'Unable to remove task',
+          'error');
       }
     })
   }
@@ -154,13 +202,22 @@ export class TodoComponent implements OnInit {
     this.displayNewTodofield = true;
   }
 
-  //OPen Modal popup on Edit Click
+  //OPen Modal popup on Edit Task Click
   editTask(taskId: string, todoId: string, taskName: string) {
+    this.isTodoUpdate = false;
     this.addIndex = true;
-    // $("#todoin").css("z-index:-1");
     this.taskId = taskId;
     this.todoId = todoId;
     this.todoForm.get("updatedTask").setValue(taskName);
+    this.displayStyle = "block";
+  }
+  //OPen Modal popup on Edit Todo Title Click
+  editTodotitle(todoId: string, todoName: string) {
+    this.isTodoUpdate = true;
+    this.addIndex = true;
+    this.todoId = todoId;
+    this.todoName = todoName;
+    this.todoForm.get("updatedTask").setValue(todoName);
     this.displayStyle = "block";
   }
 

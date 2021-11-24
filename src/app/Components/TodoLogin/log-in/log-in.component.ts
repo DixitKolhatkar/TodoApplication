@@ -71,16 +71,15 @@ export class LogInComponent implements OnInit {
     this.logInInfo.password = this.logInForm.value.password;
 
     this.todoServiceService.logIn(this.logInInfo).subscribe((response:any) => {
-      debugger;
-      console.log(response.token);
-      
       if (response.name) {
         this.todoServiceService.userName.next(response.name);
         localStorage.setItem('currentUser', response.name);
         localStorage.setItem('accessToken', response.token);
         this.router.navigate(['/todo']);
       } else {
-        Swal.fire('Email or Password is incorrect');  
+        Swal.fire( 'Failed!',
+        'Email or Password is incorrect',
+        'error');  
 
         this.logInForm.get("email").setValue("");
         this.logInForm.get("password").setValue("");

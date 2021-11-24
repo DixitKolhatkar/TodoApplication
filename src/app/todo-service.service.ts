@@ -18,11 +18,12 @@ export class TodoServiceService {
   private addNewTaskApiUrl: string = this.REST_API_ENDPOINT + "addNewTask";
   private deleteTaskApiUrl: string = this.REST_API_ENDPOINT;
   private editTaskApiUrl: string = this.REST_API_ENDPOINT + "editTask";
+  private editTitleApiUrl: string = this.REST_API_ENDPOINT + "editTitle";
   private deleteTodoApiUrl: string = this.REST_API_ENDPOINT + "deleteTodo";;
   private addNewTodoApiUrl: string = this.REST_API_ENDPOINT + "addNewTodo";
   private getMyTodoApiUrl: string = this.REST_API_ENDPOINT + "getMyTodos";
 
-  public reqHeader = new HttpHeaders({'No-Auth':'True'});
+  public reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   public datachange: BehaviorSubject<any> = new BehaviorSubject<any>('');
   public userName: BehaviorSubject<any> = new BehaviorSubject<any>('');
@@ -30,14 +31,14 @@ export class TodoServiceService {
 
   //Sign Up
   public register(details): Observable<any> {
-    return this.http.post(this.signUpApiUrl, details, {headers:this.reqHeader})
+    return this.http.post(this.signUpApiUrl, details, { headers: this.reqHeader })
       .map((response: any) => response)
       .catch(this.handleError('signUp', []))
   }
 
   // Log In
   public logIn(details): Observable<any> {
-    return this.http.post(this.loginApiUrl, details, {headers:this.reqHeader})
+    return this.http.post(this.loginApiUrl, details, { headers: this.reqHeader })
       .map((response: any) => response)
       .catch(this.handleError('login', []))
   }
@@ -79,14 +80,26 @@ export class TodoServiceService {
   }
 
   // Edit Task
-  public editTask(taskId:string, todoId:string, taskName:string): Observable<any> {
+  public editTask(taskId: string, todoId: string, taskName: string): Observable<any> {
+    debugger;
     const params: HttpParams = new HttpParams()
       .set('todoId', todoId)
       .set('taskId', taskId)
       .set('taskName', taskName)
-    return this.http.put(this.editTaskApiUrl, taskId , { params })
+    return this.http.put(this.editTaskApiUrl, taskId, { params })
       .map((response: any) => response)
       .catch(this.handleError('edit', []))
+  }
+
+  // Edit Todo Title
+  public editTodoTitle(todoId: string, todoName: string): Observable<any> {
+    debugger;
+    const params: HttpParams = new HttpParams()
+      .set('todoId', todoId)
+      .set('todoName', todoName)
+    return this.http.put(this.editTitleApiUrl,todoId, { params })
+      .map((response: any) => response)
+      .catch(this.handleError('editTitle', []))
   }
 
   // add new todo
@@ -104,6 +117,6 @@ export class TodoServiceService {
       return Observable.of(result as T);
     };
   }
-  
+
 
 }

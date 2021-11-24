@@ -1,16 +1,16 @@
 <!-- Open block to add new Todo Title -->
 <div class="add-todo-container">
     <div class="container add-todo-outer" [ngClass]="{'addClass':addIndex}">
-        <span *ngIf="displayNewTodofield">
-    
-    <form class="form-outer" [formGroup]="newTodoForm" >
-        <div style="display: flex;">
-      <input type="text" placeholder="Enter Todo Title..." formControlName="todoTitle" class="add-todo-input" >
-      <button (click)="addTodoTitle()" class="btn btn-primary btn-sm add-task-btn" >Add TODO</button>
-    </div>
-    </form>
+        <div *ngIf="displayNewTodofield">
 
-</span>
+            <form class="form-outer" [formGroup]="newTodoForm">
+                <div style="display: flex;">
+                    <input type="text" placeholder="Enter Todo Title..." formControlName="todoTitle" class="add-todo-input">
+                    <button (click)="addTodoTitle()" class="btn btn-primary btn-sm add-task-btn">Add TODO</button>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="add-todo-btn" *ngIf="!displayNewTodofield">
@@ -18,18 +18,23 @@
     </div>
 </div>
 
+
 <div class="container outer-border">
-    <span *ngFor="let todos of todoList">
+    <span *ngFor="let todos of todoList; let j = index;">
     <div class="card card-outer">
   <form class="form-outer" [formGroup]="todoForm" (keydown.enter)="$event.preventDefault()" >
 
  <!-- Display tasks with Todo Title  -->
  <div class="todo-outer">
-    <span class="todo-title"><b>{{todos.todoTitle}}</b></span>
+    <span class="todo-title" #todoName><b>{{todos.todoTitle}}</b></span>
+    <button class="btn btn-primary btn-sm btn-edit" (click)="editTodotitle(todos._id,todoName.innerText)">Edit</button>
     <button class="btn btn-danger btn-sm" (click)="deleteTodo(todos._id)">Remove Todo</button>
+    <button class="btn btn-primary accordion-button" style="width: 50px;display: contents;" type="button" data-bs-toggle="collapse" data-bs-target="#aaa">
+             
+          </button>
 </div>
 <hr>
-<div class="todos">
+<div class="todos collapse" id="aaa">
     <div *ngFor="let todo of todos.todoItems; let i = index;" class="todo">
         <div class="id"> {{i+1}} </div>
         <div class="content" #todoTask> {{todo.todoName}} </div>
@@ -46,10 +51,13 @@
                 <h4 class="modal-title">Edit Task</h4>
             </div>
             <div class="modal-body">
-                <input type="text" formControlName="updatedTask" style="width: 100%;">
+                <input type="text" formControlName="updatedTask" class="update-input">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="updateTask()">
+                <button type="button" *ngIf="!isTodoUpdate" class="btn btn-primary" (click)="updateTask()">
+                    Update
+                  </button>
+                <button type="button" *ngIf="isTodoUpdate" class="btn btn-primary" (click)="updateTodo()">
                     Update
                   </button>
                 <button type="button" class="btn btn-danger" (click)="closePopup()">
@@ -61,8 +69,8 @@
 </div>
 
 <!-- Add task under Todo -->
-<div style="display: flex;">
-    <input type="text" placeholder="Enter Task..." formControlName="todoName" class="todo-input">
+<div class="add-task-outer">
+    <input type="text" placeholder="Enter Task..." formControlName="todoName" class="todo-input" (keyup.enter)="addTask(todos._id)">
     <button (click)="addTask(todos._id)" class="btn btn-primary btn-sm add-task-btn">Add Task</button>
 </div>
 
