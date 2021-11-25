@@ -29,12 +29,12 @@
     <span class="todo-title" #todoName><b>{{todos.todoTitle}}</b></span>
     <button class="btn btn-primary btn-sm btn-edit" (click)="editTodotitle(todos._id,todoName.innerText)">Edit</button>
     <button class="btn btn-danger btn-sm" (click)="deleteTodo(todos._id)">Remove Todo</button>
-    <button class="btn btn-primary accordion-button" style="width: 50px;display: contents;" type="button" data-bs-toggle="collapse" data-bs-target="#aaa">
+    <button class="btn btn-primary accordion-button" style="width: 50px;display: contents;" type="button" data-bs-toggle="collapse" data-bs-target="#todo">
              
           </button>
 </div>
 <hr>
-<div class="todos collapse" id="aaa">
+<div class="todos collapse" id="todo">
     <div *ngFor="let todo of todos.todoItems; let i = index;" class="todo">
         <div class="id"> {{i+1}} </div>
         <div class="content" #todoTask> {{todo.todoName}} </div>

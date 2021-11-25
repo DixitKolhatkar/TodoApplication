@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { TodoServiceService } from 'src/app/todo-service.service';
 import { TodoLogIn } from './log-in';
@@ -19,7 +19,7 @@ export class LogInComponent implements OnInit {
   public isValidation:boolean = false;
   public fieldrequired:string;
 
-  constructor(public formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private router:Router) {
+  constructor(private formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private router:Router) {
     this.logInInfo = new TodoLogIn();
   }
 

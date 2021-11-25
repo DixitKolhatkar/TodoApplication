@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router, Event, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Todo Application';
   public IsTodo: boolean = false;
-  constructor(private router: Router) {
+  constructor( private elementRef:ElementRef, private router: Router) {
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         if (event.url === "/todo" || event.urlAfterRedirects === '/todo') {
@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
     });
   }
   ngOnInit() {
-  
+    this.elementRef.nativeElement.ownerDocument
+    .body.style.backgroundColor = '#edd1d9';
 
 }
 }

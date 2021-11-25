@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { TodoItems, TodoList } from './todo';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TodoServiceService } from 'src/app/todo-service.service';
@@ -26,9 +26,8 @@ export class TodoComponent implements OnInit {
   public todoName: string;
   public isTodoUpdate: boolean = false;
 
-  constructor(public formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private datePipe: DatePipe) {
+  constructor(private formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private datePipe: DatePipe) {
   }
-// Learning Github - Test push changes
 
   ngOnInit(): void {
     this.myFormattedDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
