@@ -28,7 +28,10 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "allowedCommonJsDependencies": [
+                            "rxjs"
+                        ]
                     },
                     "configurations": {
                         "production": {

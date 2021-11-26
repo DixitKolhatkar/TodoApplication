@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
   public signUpForm: FormGroup;
   public registration: TodoSignUp;
-  public isValidation: boolean = false;
   public fieldrequired: string;
   constructor(private formBuilder: FormBuilder, private todoServiceService: TodoServiceService, private router: Router) {
     this.registration = new TodoSignUp();
@@ -24,9 +23,7 @@ export class SignUpComponent implements OnInit {
   }
 
   public buildFormControls() {
-
     this.signUpForm = this.formBuilder.group({
-
       "name": new FormControl('', [
         Validators.required
       ]),
@@ -49,7 +46,6 @@ export class SignUpComponent implements OnInit {
   }
 
   public setFocusOnInvalidField(): void {
-    this.isValidation = false;
     this.fieldrequired = "";
     let invalidFields = Object.keys(this.signUpForm.controls)
       .filter(c => this.signUpForm.get(c).status === "INVALID");
@@ -60,11 +56,8 @@ export class SignUpComponent implements OnInit {
 
       let inputDetail = Object.keys(this.signUpForm.controls)
         .filter(input => input === field);
-      debugger;
-
       if (inputDetail.length > 0) {
-        this.isValidation = true;
-        this.fieldrequired = field;
+       this.fieldrequired = field;
       }
     }
   }

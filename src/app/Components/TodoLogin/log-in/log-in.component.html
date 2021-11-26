@@ -11,26 +11,22 @@
             <div class="container">
                 <div>
                     <label><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" formControlName="email">
-                    <div class="err-msg" *ngIf="isValidation && fieldrequired === 'email'">{{fieldrequired}} fiels is required.</div>
+                    <input type="text" placeholder="Enter Email" formControlName="email" id="email" name="email" autocomplete="off">
+                    <div class="err-msg" *ngIf="logInForm.get('email')?.hasError('required') && logInForm.get('email').touched">{{fieldrequired}} fiels is required.</div>
+                    <div class="err-msg" *ngIf="logInForm.get('email')?.hasError('pattern')">
+                        Must be a valid <strong>email</strong>
+                    </div>
                 </div>
                 <div>
                     <label><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" formControlName="password">
-                    <div class="err-msg" *ngIf="isValidation && fieldrequired === 'password'">{{fieldrequired}} fiels is required.</div>
+                    <input type="password" placeholder="Enter Password" formControlName="password" id="password" name="password" autocomplete="off">
+                    <div class="err-msg" *ngIf="logInForm.get('password')?.hasError('required') && logInForm.get('password').touched">{{fieldrequired}} fiels is required.</div>
                 </div>
                 <div class="login-outer">
                     <button type="submit" class="btn btn-primary" (click)="onLogin() ">Login</button>
                     <button type="button " class="cancelbtn btn btn-danger" [routerLink]="'/home'">Cancel</button>
                 </div>
             </div>
-
-            <!-- <div class="forgot-outer">
-                <div>
-                    <button type="button" class="forgot-inner btn btn-primary btn-sm">Forgot Password?</button>
-                </div>
-            </div> -->
         </form>
-
     </div>
 </div>

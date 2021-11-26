@@ -10,13 +10,13 @@
                 <div class="card-left">
                     <div>
                         <label><b>User Name</b></label>
-                        <input type="text" placeholder="Enter Username" id="name" formControlName="name">
-                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'name'">{{fieldrequired}} fiels is required.</div>
+                        <input type="text" placeholder="Enter Username" formControlName="name" id="name" name="name" autocomplete="off">
+                        <div class="err-msg" *ngIf="signUpForm.get('name')?.hasError('required') && signUpForm.get('name').touched">{{fieldrequired}} fiels is required.</div>
                     </div>
                     <div class="card-right">
                         <label><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" id="email" formControlName="email">
-                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'email'">{{fieldrequired}} fiels is required.</div>
+                        <input type="text" placeholder="Enter Email" formControlName="email" id="email" name="email" autocomplete="off">
+                        <div class="err-msg" *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email').touched">{{fieldrequired}} fiels is required.</div>
                         <div class="err-msg" *ngIf="signUpForm.get('email')?.hasError('pattern')">
                             Must be valid <strong>email</strong>
                         </div>
@@ -26,19 +26,19 @@
                 <div class="card-left">
                     <div>
                         <label><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" id="password" formControlName="password">
-                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'password'">{{fieldrequired}} fiels is required.</div>
+                        <input type="password" placeholder="Enter Password" formControlName="password" id="password" name="password" autocomplete="off">
+                        <div class="err-msg" *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password').touched">{{fieldrequired}} fiels is required.</div>
                     </div>
                     <div style="margin-left: 15px;">
                         <label><b>Confirm Password</b></label>
-                        <input type="password" placeholder="Enter Confirm Password" id="confirmPassword" formControlName="confirmPassword">
-                        <div class="err-msg" *ngIf="isValidation && fieldrequired === 'confirmPassword'">{{fieldrequired}} fiels is required.</div>
+                        <input type="password" placeholder="Enter Confirm Password" formControlName="confirmPassword" id="confirmPassword" name="confirmPassword" autocomplete="off">
+                        <div class="err-msg" *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword').touched">{{fieldrequired}} fiels is required.</div>
                     </div>
                 </div>
                 <div>
                     <label><b>Phone Number</b></label>
-                    <input type="text" placeholder="Enter Phone Number" id="phone" formControlName="phone" oninput="this.value=this.value.replace(/[^0-9\.]/g,'');">
-                    <div class="err-msg" *ngIf="isValidation && fieldrequired === 'phone'">{{fieldrequired}} fiels is required.</div>
+                    <input type="text" placeholder="Enter Phone Number" formControlName="phone" id="phone" name="phone" oninput="this.value=this.value.replace(/[^0-9\.]/g,'');" autocomplete="off">
+                    <div class="err-msg" *ngIf="signUpForm.get('phone')?.hasError('required') && signUpForm.get('phone').touched">{{fieldrequired}} fiels is required.</div>
                     <div class="err-msg" *ngIf="signUpForm.get('phone')?.hasError('maxlength') ">
                         Phone Number can be max <strong>14</strong> .
                     </div>
