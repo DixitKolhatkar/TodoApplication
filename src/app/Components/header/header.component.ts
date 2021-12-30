@@ -24,11 +24,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // document.body.style.overflow = 'hidden';
-   if(window.localStorage.currentUser){
-    this.currentUser = window.localStorage.currentUser;
-   }
+    if (window.localStorage.currentUser) {
+      this.currentUser = window.localStorage.currentUser;
+    }
   }
-
   redirectHome() {
     this.IsTodo = false;
     localStorage.removeItem('accessToken');
